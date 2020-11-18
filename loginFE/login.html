@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+</head>
+<body>
+    <input id="name" type="text" name="" placeholder="登录名">
+    <input id="password" type="password" placeholder="密码">
+    <button id="button">登录</button>
+    <script src="./lib/ajax.js"></script>
+    <script>
+        var name = document.getElementById('name').value
+        var password = document.getElementById('password').value
+        var button = document.getElementById('button')
+        let param = {name: 'chen', password: 123}
+        console.log(param)
+        button.onclick = function() {
+            ajax('post', '/api/login', JSON.stringify(param), function(result) {
+                if (result.errorno !== 0) {
+                    alert('登录失败')
+                } else {
+                    document.cookie = result
+                }
+            })
+        }
+    </script>
+</body>
+</html>
